@@ -47,28 +47,70 @@
 <script>
 let pyodideReady = loadPyodide();
 
-const challenges = [
-  { id:1, title:"Sum of Two Numbers", description:"Write a function <code>sum(a, b)</code> that returns the sum of two numbers.", starter:"def sum(a, b):\n    return a + b", functionName:"sum", tests:[ { input:[2,3], expected:5 }, { input:[-1,5], expected:4 } ] },
-  { id:2, title:"Subtraction of Two Numbers", description:"Write a function <code>sub(a, b)</code> that returns the subtraction of two numbers.", starter:"def sub(a, b):\n    return a - b", functionName:"sub", tests:[ { input:[2,3], expected:-1 }, { input:[-1,5], expected:-6 } ] },
-  { id:3, title:"Return the First Element", description:"Write a function <code>getFirst(arr)</code> that returns the first element of an array.", starter:"def getFirst(arr):\n    return arr[0]", functionName:"getFirst", tests:[ { input:[[1,2,3]], expected:1 }, { input:[[10,20,30]], expected:10 }, { input:[[5]], expected:5 } ] },
-  { id:4, title:"Reverse a String", description:"Write a function <code>reverseString(str)</code> that returns the reversed string.", starter:"def reverseString(s):\n    return s[::-1]", functionName:"reverseString", tests:[ { input:["hello"], expected:"olleh" }, { input:["abc"], expected:"cba" }, { input:["!123"], expected:"321!" } ] }
+const pythonChallenges = [
+  {
+    id: 1,
+    title: "Math Operators",
+    description: "Write a function <code>plustwosquared(a)</code> that returns the square of number <code>a</code> + 2.<br><br>Perform the addition of two to number <code>a</code> before multiplying it by itself.<br><br>In use here: <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>plustwosquared(5)</code> -> Output: 49",
+    starter: "def plustwosquared(a):\n    # Your code here\n    pass",
+    functionName: "plustwosquared",
+    tests: [
+      { input: [3], expected: 25 },
+      { input: [7], expected: 81 }
+    ]
+  },
+  {
+    id: 2,
+    title: "Reverse the Boolean",
+    description: "Write a function <code>reverse(a)</code> that when given boolean <code>a</code>, returns the opposite value of <code>a</code>.<br><br>If boolean a is <code>true</code>, it should return <code>false</code>, and if a is <code>false</code>, it should return <code>true</code>.<br><br>In use here: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(True)</code> -> Output: False",
+    starter: "def reverse(a):\n    # Your code here\n    pass",
+    functionName: "reverse",
+    tests: [
+      { input: [true], expected: false },
+      { input: [false], expected: true }
+    ]
+  },
+  {
+    id: 3,
+    title: "Check the Temperature",
+    description: "Write a function <code>checktemp(temp)</code> that returns <code>False</code> if the temperature is more than 80 or less than or equal to 70; otherwise it returns <code>True</code>.<br><br>This exercise is all about proper use of conditionals and logical comparison.<br><br>In use here: <br>Conditionals: if, elif, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>checktemp(90)</code> -> Output: False",
+    starter: "def checktemp(temp):\n    # Your code here\n    pass",
+    functionName: "checktemp",
+    tests: [
+      { input: [81], expected: false },
+      { input: [70], expected: false },
+      { input: [71], expected: true }
+    ]
+  },
+  {
+    id: 4,
+    title: "Sum from 1 to N",
+    description: "Write a function <code>triangular(n)</code> that returns the sum of numbers from 1 to <code>n</code> (a triangular number).<br><br>You are going to need loops for this one. Also, remember that since loops start counting from 0, you will need to do an extra loop.<br><br>In use here: <br>Loops: for i in range(...): <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",
+    starter: "def triangular(n):\n    # Your code here\n    pass",
+    functionName: "triangular",
+    tests: [
+      { input: [4], expected: 10 },
+      { input: [5], expected: 15 },
+      { input: [9], expected: 45 }
+    ]
+  }
 ];
 
 let currentIndex=0;
 let completed={};
 let testResults={};
-challenges.forEach(ch=>testResults[`cases_${ch.id}`]=new Array(ch.tests.length).fill(false));
+pythonChallenges.forEach(ch=>testResults[`cases_${ch.id}`]=new Array(ch.tests.length).fill(false));
 
-function totalTests(){ return challenges.reduce((sum,ch)=>sum+ch.tests.length,0); }
+function totalTests(){ return pythonChallenges.reduce((sum,ch)=>sum+ch.tests.length,0); }
 function totalPassed(){ 
-  return challenges.reduce((total,ch)=>{
+  return pythonChallenges.reduce((total,ch)=>{
     const arr = testResults[`cases_${ch.id}`];
     return total + arr.reduce((s,p)=>s+(p?1:0),0);
   },0);
 }
 
 function loadChallenge(index){
-  const ch = challenges[index];
+  const ch = pythonChallenges[index];
   document.getElementById("title").innerHTML = ch.title;
   document.getElementById("description").innerHTML = ch.description;
   document.getElementById("code").value = ch.starter;
@@ -89,7 +131,7 @@ function showVisibleTests(ch){
 
 async function runCode(){
   const pyodide = await pyodideReady;
-  const ch = challenges[currentIndex];
+  const ch = pythonChallenges[currentIndex];
   const code = document.getElementById("code").value;
   const outputDiv = document.getElementById("output");
   outputDiv.innerHTML=`<h3>Test Results:</h3>`;
@@ -101,7 +143,12 @@ async function runCode(){
     await pyodide.runPythonAsync(code);
     for(let i=0;i<ch.tests.length;i++){
       const t = ch.tests[i];
-      const args = t.input.map(v=>JSON.stringify(v)).join(", ");
+      const pyArg = v => {
+        if (v === true) return "True";
+        if (v === false) return "False";
+        return v;
+      };
+      const args = t.input.map(pyArg).join(", ");
       const result = pyodide.runPython(`${ch.functionName}(${args})`);
       const pass = result === t.expected;
       caseResults[i] = pass;
@@ -123,20 +170,20 @@ async function runCode(){
   }
 }
 
-function nextChallenge(){ currentIndex=(currentIndex+1)%challenges.length; loadChallenge(currentIndex); }
-function prevChallenge(){ currentIndex=(currentIndex-1+challenges.length)%challenges.length; loadChallenge(currentIndex); }
+function nextChallenge(){ currentIndex=(currentIndex+1)%pythonChallenges.length; loadChallenge(currentIndex); }
+function prevChallenge(){ currentIndex=(currentIndex-1+pythonChallenges.length)%pythonChallenges.length; loadChallenge(currentIndex); }
 
 function updateProgress(){
   const doneCount = Object.keys(completed).length;
-  const total = challenges.length;
-  document.getElementById("progress").innerText=`Challenges Completed: ${doneCount} / ${total}`;
+  const total = pythonChallenges.length;
+  document.getElementById("progress").innerText=`pythonChallenges Completed: ${doneCount} / ${total}`;
   document.getElementById("grade").innerText=`Total Grade: ${totalPassed()} / ${totalTests()} tests passed`;
 }
 
 function renderChallengeList(){
   const listDiv=document.getElementById("challengeList");
   listDiv.innerHTML="";
-  challenges.forEach((ch,i)=>{
+  pythonChallenges.forEach((ch,i)=>{
     const span=document.createElement("span");
     span.innerText=ch.title;
     span.className="challengeItem";
