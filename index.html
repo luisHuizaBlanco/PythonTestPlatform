@@ -176,7 +176,7 @@ function prevChallenge(){ currentIndex=(currentIndex-1+pythonChallenges.length)%
 function updateProgress(){
   const doneCount = Object.keys(completed).length;
   const total = pythonChallenges.length;
-  document.getElementById("progress").innerText=`pythonChallenges Completed: ${doneCount} / ${total}`;
+  document.getElementById("progress").innerText=`Challenges Completed: ${doneCount} / ${total}`;
   document.getElementById("grade").innerText=`Total Grade: ${totalPassed()} / ${totalTests()} tests passed`;
 }
 
