@@ -7,6 +7,7 @@
 <style>
   body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 40px; }
   h1 { color: #333; }
+  code { font-family: Arial, sans-serif; color: #1500ff; font-size: 16px; }
   textarea { width: 100%; height: 180px; font-family: monospace; font-size: 14px; }
   button { background: #007bff; color: white; border: none; padding: 10px 16px; margin: 8px 4px; cursor: pointer; border-radius: 6px; }
   button:hover { background: #0056b3; }
@@ -51,8 +52,8 @@ const pythonChallenges = [
   {
     id: 1,
     title: "Math Operators",
-    description: "Write a function <code>squared(a)</code> that returns the square of number <code>a</code>.<br><br>In use here: <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>squared(3)</code> -> Output: 9",
-    starter: "def squared(a):\n    # Your code here\n    pass",
+    description: "In the function <code>squared(n)</code> below, write code so that it returns square of a number <code>n</code>.<br><br>If you don't know, the square of a number <code>n</code> is <code>n</code> times <code>n</code>.<br><br>To solve this, use: <br>Functions: return <br>Math Operators: +, -, *, /<br><br>Example: <code>squared(2)</code> -> Output: 4",
+    starter: "def squared(n):\n    # Your code in the line below\n    pass",
     functionName: "squared",
     tests: [
       { input: [5], expected: 25 },
@@ -62,8 +63,8 @@ const pythonChallenges = [
   {
     id: 2,
     title: "Reverse the Boolean",
-    description: "Write a function <code>reverse(a)</code> that when given boolean <code>a</code>, returns the opposite value of <code>a</code>.<br><br>If boolean a is <code>true</code>, it should return <code>false</code>, and if a is <code>false</code>, it should return <code>true</code>.<br><br>In use here: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(True)</code> -> Output: False",
-    starter: "def reverse(a):\n    # Your code here\n    pass",
+    description: "In the function <code>reverse(bool)</code> that when given boolean <code>bool</code>, returns the opposite value of <code>bool</code>. <br><br> That means, if bool is <code>true</code>, it should return <code>false</code>, and if bool is <code>false</code>, it should return <code>true</code>.<br><br>To solve this, use: <br>Conditionals: if, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>reverse(true)</code> -> Output: false",
+    starter: "def reverse(bool):\n    # Your code in the line below\n    pass",
     functionName: "reverse",
     tests: [
       { input: [true], expected: false },
@@ -73,9 +74,9 @@ const pythonChallenges = [
   {
     id: 3,
     title: "Check the Temperature",
-    description: "Write a function <code>checktemp(temp)</code> that returns <code>False</code> if the temperature is more than 80 or less than or equal to 70; otherwise it returns <code>True</code>.<br><br>This exercise is all about proper use of conditionals and logical comparison.<br><br>In use here: <br>Conditionals: if, elif, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>checktemp(90)</code> -> Output: False",
-    starter: "def checktemp(temp):\n    # Your code here\n    pass",
-    functionName: "checktemp",
+    description: "Write a function <code>check_temp(temp)</code> that returns <code>False</code> if the temperature is more than 80 or less than or equal to 70; otherwise it returns <code>True</code>.<br><br>This exercise is all about proper use of conditionals and logical comparison.<br><br>In use here: <br>Conditionals: if, elif, else <br>Comparison Operators: ==, <, <=<br><br>Example: <code>checktemp(90)</code> -> Output: False",
+    starter: "def check_temp(temp):\n    # Your code in the line below\n    pass",
+    functionName: "check_temp",
     tests: [
       { input: [81], expected: false },
       { input: [70], expected: false },
@@ -85,8 +86,8 @@ const pythonChallenges = [
   {
     id: 4,
     title: "Sum from 1 to N",
-    description: "Write a function <code>triangular(n)</code> that returns the sum of numbers from 1 to <code>n</code> (a triangular number).<br><br>You are going to need loops for this one. Also, remember that since loops start counting from 0, you will need to do an extra loop.<br><br>In use here: <br>Loops: for i in range(...): <br>Variable Assignment: = <br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",
-    starter: "def triangular(n):\n    # Your code here\n    pass",
+    description: "Write a function <code>triangular(n)</code> that when given a variable <code>n</code>, returns the sum of the numbers from 1 to <code>n</code>.<br><br>You are going to need to use a loop for this one. If you remember, inside of a loop we have the line <code>let i = 0</code>, this <code>i</code> counts how many loops are made, you can use that to get the sum from 1 to <code>n</code>.<br><br>In use here: <br>Loops: for(let i = 0; i < [number of loops you want]; i++) {}<br>Variable Assignment: =<br>Math Operators: +, -, *, /<br><br>Example: <code>triangular(3)</code> -> Output: 6",
+    starter: "def triangular(n):\n    # Your code in the line below\n    pass",
     functionName: "triangular",
     tests: [
       { input: [4], expected: 10 },
